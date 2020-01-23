@@ -44,3 +44,52 @@
 .homepage-img {
   width: 100px;
 }
+
+/* sidebar */
+aside {
+  section {
+    padding: 10px 0;
+    border-top: 1px solid rgb(238, 238, 238);
+    &:first-child {
+      border: 0;
+      padding-top: 0;
+    }
+    span {
+      display: block;
+      margin-bottom: 3px;
+      line-height: 1;
+    }
+    h1 {
+      font-size: 1.4em;
+      text-align: left;
+      letter-spacing: -1px;
+      margin-bottom: 3px;
+      margin-top: 0px;
+    }
+  }
+}
+
+.show {
+  margin-top: 5rem;
+}
+
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+
+/* forms */
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  margin-bottom: 15px;
+}
+
+input {
+  height: auto !important;
+}
+
+.form {
+  width: 40rem;
+  margin-left: 14rem;
+  margin-top: 7rem;
+}

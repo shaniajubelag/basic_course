@@ -93,3 +93,17 @@ input {
   margin-left: 14rem;
   margin-top: 7rem;
 }
+
+/* Users index */
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid rgb(238, 238, 238);
+    &:last-child {
+      border-bottom: 1px solid rgb(238, 238, 238);
+    }
+  }
+}

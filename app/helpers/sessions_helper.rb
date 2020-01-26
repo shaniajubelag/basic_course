@@ -39,4 +39,9 @@ module SessionsHelper
     session[:forwarding_url] = request.original_url if request.get?
   end
 
+  def only_loggedin_users
+    # Goes to login page UNLESS the user is logged in already
+    redirect_to login_url unless logged_in?
+  end
+
 end

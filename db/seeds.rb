@@ -20,3 +20,9 @@ User.create!(name: "Michael Reeves",
               password: password,
               password_confirmation: password)
 end
+
+users = User.order(:created_at).take(7) #first 7 users witll have posts
+50.times do
+  content = Faker::Lorem.sentence(5)
+  users.each { |user| user.microposts.create!(content: content) }
+end

@@ -17,6 +17,10 @@
  *= require_self
  */
 
+body {
+  margin-top: 57px;
+}
+
 /* header */
 #logo {
   float: left;
@@ -69,10 +73,6 @@ aside {
   }
 }
 
-.show-gravatar {
-  margin-top: 5rem;
-}
-
 .gravatar {
   float: left;
   margin-right: 10px;
@@ -105,5 +105,30 @@ input {
     &:last-child {
       border-bottom: 1px solid rgb(238, 238, 238);
     }
+  }
+}
+
+/* microposts */
+
+.microposts-lists {
+  list-style: none;
+  margin: 10px 0 0 0;
+
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+}
+.timestamp {
+  color: rgb(160, 160, 160);
+}
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
   }
 }

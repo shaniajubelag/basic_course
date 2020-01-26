@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def index
     # @users = User.all
-    @users = User.paginate(page: params[:page], per_page: 10 )
+    @users = User.paginate(page: params[:page], per_page: 10)
   end
 
   def new
@@ -22,6 +22,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page], per_page: 12)
   end
 
   def edit
@@ -49,10 +50,6 @@ class UsersController < ApplicationController
   end
 
   # Before filters
-  def only_loggedin_users
-    # Goes to login page UNLESS the user is logged in already
-    redirect_to login_url unless logged_in?
-  end
 
   def correct_user
     @user = User.find(params[:id])

@@ -1,11 +1,31 @@
 <% provide(:title, @user.name) %>
-<div class="show-gravatar">
-    <aside class="span">
-        <section>
-            <h1>
-                <%= gravatar_for @user %>
-                <%= @user.name %>
-            </h1>
-        </section>
-    </aside>
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-3">
+            <aside class="span">
+                <section>
+                    <h1>
+                        <%= gravatar_for @user %>
+                        <%= @user.name %>
+                    </h1>
+                </section>
+            </aside>
+        </div>
+        <div class="col-9">
+            <div class="microposts">
+                <% if @user.microposts.any? %>
+                    <h3>Microposts (<%= @user.microposts.count %>)</h3>
+                    <ol class="microposts-lists">
+                        <!-- found in the microposts folder, under a partial file -->
+                        <%= render @microposts %>
+                    </ol>
+                    <div class="row">
+                        <div class="container">
+                            <%= will_paginate @microposts %>
+                        </div>    
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
 </div>

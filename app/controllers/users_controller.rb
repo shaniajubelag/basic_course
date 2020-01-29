@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :only_loggedin_users, only: [:index, :edit, :update]
+  before_action :only_loggedin_users, only: [:index, :edit, :update,
+                                              :destroy, :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
 
   def index
@@ -43,6 +44,21 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
  
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.followed_users.paginate(page: params[:page], per_page: 5)
+    @all_users = @user.followed_users
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page], per_page: 5)
+    @all_users = @user.followers
+    render 'show_follow'
+  end
 
   private
   def user_params

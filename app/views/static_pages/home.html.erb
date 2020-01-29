@@ -4,6 +4,9 @@
         <aside class="col-3">
             <section>
                 <%= render 'shared/user_info' %>
+                <span>
+                    <%= link_to "view my profile", current_user, class: "text-center" %>
+                </span>
             </section>
             <section>
                 <%= render 'shared/micropost_form' %>

@@ -4,13 +4,17 @@ class User < ApplicationRecord
 
   # Following Function
   # Followed Users
-  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
-  has_many :followed_users, through: :relationships, source: :followed
+  has_many :active_relationships, foreign_key: "follower_id",
+                                  class_name: "Relationship",
+                                  dependent: :destroy
+  # user.active_relationships.followed_id -> user.followed_users
+  has_many :followed_users, through: :active_relationships, source: :followed
+
   # Followers
-  has_many :reverse_relationships, foreign_key: "followed_id",
-            class_name:  "Relationship",
-            dependent:   :destroy
-  has_many :followers, through: :reverse_relationships, source: :follower
+  has_many :passive_relationships, foreign_key: "followed_id", # no conflict because they have different FK
+                                    class_name: "Relationship", # able to use the same table
+                                    dependent: :destroy
+  has_many :followers, through: :passive_relationships, source: :follower
 
   # Basic Model needs for Signup and Login
   validates :name, presence: true, length: { minimum: 5 }
@@ -22,14 +26,18 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }
   has_secure_password
 
-  def User.new_remember_token
-    SecureRandom.urlsafe_base64
+  def feed 
+    Micropost.where("user_id = ?", id)
+    # Micropost.find(id)
+    # Micropost.find_by(user_id: id)
   end
 
-  def User.digest(token)
-    Digest::SHA1.hexdigest(token.to_s)
+  # Returns true if the current user is following the other user
+  def following?(other_user)
+    active_relationships.find_by(followed_id: other_user.id)
   end
 
+<<<<<<< Updated upstream
   def feed
     # This is preliminary. See "Following users" for the full implementation.
     # Micropost.where("user_id = ?", id)
@@ -49,10 +57,15 @@ class User < ApplicationRecord
   # Unfollows a user
   def unfollow(other_user)
     relationships.find_by(followed_id: other_user.id).destroy
+=======
+  # Follows a user
+  def follow(other_user)
+    active_relationships.create!(followed_id: other_user.id)
+>>>>>>> Stashed changes
   end
 
-  private
-    def create_remember_token
-      self.remember_token = User.digest(User.new_remember_token)
-    end
+  # Unfollows a user
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
 end

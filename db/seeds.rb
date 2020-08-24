@@ -11,6 +11,7 @@ User.create!(name: "Michael Reeves",
                  password: "password",
                  password_confirmation: "password")
 
+#  More than 1 user
 99.times do |n|
   name  = Faker::Name.name
   email = "username#{n+1}@email.org"

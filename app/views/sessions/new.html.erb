@@ -1,6 +1,6 @@
 <% provide(:title, 'Login') %>
-<div class="form content">
-    <h1 class="text-center">Login</h1>
+<div class="form jumbotron content bg-dark text-light">
+    <h1 class="text-center display-4">Login</h1>
     <div class="container">
         <%= form_for(:session, url: sessions_path) do |f| %>
             <%= f.label :email %>

@@ -37,31 +37,9 @@ class User < ApplicationRecord
     active_relationships.find_by(followed_id: other_user.id)
   end
 
-<<<<<<< Updated upstream
-  def feed
-    # This is preliminary. See "Following users" for the full implementation.
-    # Micropost.where("user_id = ?", id)
-    Micropost.from_users_followed_by(self)
-  end
-
-  # Returns true if the current user is following the other user
-  def following?(other_user)
-    relationships.find_by(followed_id: other_user.id)
-  end
-
-  # Follows a user
-  def follow(other_user)
-    relationships.create!(followed_id: other_user.id)
-  end
-
-  # Unfollows a user
-  def unfollow(other_user)
-    relationships.find_by(followed_id: other_user.id).destroy
-=======
   # Follows a user
   def follow(other_user)
     active_relationships.create!(followed_id: other_user.id)
->>>>>>> Stashed changes
   end
 
   # Unfollows a user

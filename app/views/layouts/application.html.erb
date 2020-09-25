@@ -10,9 +10,16 @@
     </head>
 
     <body>
-        <%= render 'layouts/header' %>
-        <div class="container p-4 mt-4">
-            <%= yield %>
+        <div class="content">
+            <%= render 'layouts/header' %>
+
+            <div class="container pt-2 mb-0">
+                <%= render "shared/error_messages" %>
+            </div>
+
+            <div class="container p-4 mt-2">
+                <%= yield %>
+            </div>
         </div>
     </body>
 </html>

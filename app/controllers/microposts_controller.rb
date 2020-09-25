@@ -1,14 +1,15 @@
 class MicropostsController < ApplicationController
   before_action :only_loggedin_users, only: [:create, :destroy]
-  before_action :correct_user
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
+      flash[:success] = "Successfully saved!"
       redirect_to root_url
     else
       @feed_items = []
-      render root_url
+      flash[:danger] = "Invalid content. Try again."
+      redirect_to root_url
     end
   end
 
@@ -31,11 +32,5 @@ class MicropostsController < ApplicationController
   private
   def micropost_params
     params.require(:micropost).permit(:content)
-  end
-
-  # Check that the current user actually has a micropost with the given id
-  def correct_user
-    @micropost = current_user.microposts.find_by(id: params[:id])
-    redirect_to root_url if @micropost.nil?
   end
 end

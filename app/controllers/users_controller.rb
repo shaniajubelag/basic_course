@@ -13,10 +13,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)    # Not the final implementation!
+    @user = User.new(user_params) 
     if @user.save
+      flash[:success] = "Saved successfully!"
       redirect_to login_url
     else
+      flash[:danger] = "Invalid content. Try again."
       render 'new'
     end
   end
@@ -33,8 +35,10 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
+      flash[:success] = "Saved successfully!"
       redirect_to @user
     else
+      flash[:danger] = "Invalid content. Try again."
       render 'edit'
     end
   end

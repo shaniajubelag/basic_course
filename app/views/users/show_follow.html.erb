@@ -9,14 +9,18 @@
                 <span><b>Microposts:</b> <%= @user.microposts.count %></span>
             </section>
             <section class="stats">
-                <%= render 'shared/stats' %>
-                <% if @all_users.any? %>
-                    <div class="s">
-                    <% @all_users.each do |user| %>
-                        <%= link_to gravatar_for(user, size: 30), user %>
+                <section>
+                    <%= render 'shared/stats' %>
+                </section>
+                <section>
+                    <% if @all_users.any? %>
+                        <div class="s">
+                        <% @all_users.each do |user| %>
+                            <%= link_to gravatar_for(user, size: 30), user %>
+                        <% end %>
+                        </div>
                     <% end %>
-                    </div>
-                <% end %>
+                </section>
             </section>
         </aside>
         <div class="col-md-8">

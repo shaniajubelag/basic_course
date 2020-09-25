@@ -1,5 +1,6 @@
 class MicropostsController < ApplicationController
   before_action :only_loggedin_users, only: [:create, :destroy]
+  before_action :correct_user
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
@@ -14,6 +15,17 @@ class MicropostsController < ApplicationController
   def destroy
     Micropost.find(params[:id]).destroy
     redirect_to root_url
+  end
+
+  # Likes
+  def like
+    # To return to Show Page, need user ID
+    # This is passed from View through hidden field
+    # @user = User.find(params[:user_id])
+    @micropost = Micropost.find(params[:id])
+    @micropost.likes.create
+
+    redirect_back(fallback_location: root_path)
   end
 
   private

@@ -1,7 +1,8 @@
 <% provide(:title, 'Sign up') %>
-<div class="form content">
-    <h1 class="text-center">Sign up</h1>
+<div class="form jumbotron bg-dark text-light">
+    <h1 class="text-center display-4">Sign up</h1>
     <div class="container">
         <%= render 'form' %>
+        <p>Already have an account? <%= link_to "Login!" %></p>
     </div>
 </div>

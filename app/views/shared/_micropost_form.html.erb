@@ -1,6 +1,6 @@
 <%= form_for(@micropost) do |f| %>
     <div class="field">
-        <%= f.text_area :content, placeholder: "Compose new micropost...", class: "w-100" %>
+        <%= f.text_area :content, placeholder: "Compose new micropost...", class: "w-100 p-2" %>
     </div>
     <%= f.submit "Post", class: "btn btn-block btn-primary" %>
 <% end %>

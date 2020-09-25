@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+
   # We can only make and delete posts just like TWITTER
   resources :microposts, only: [:create, :destroy]
   # For follow and unfollow
@@ -18,4 +19,12 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
+
+  # Likes
+  resources :microposts do
+    member do
+      post 'like'
+    end
+  end
+  
 end

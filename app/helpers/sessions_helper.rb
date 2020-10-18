@@ -11,7 +11,7 @@ module SessionsHelper
   end
   
   # Returns the current logged-in user (if any).
-  def current_user
+  def current_user # after log_in -> current_user
     if session[:user_id]
       @current_user ||= User.find_by(id: session[:user_id])
     end
@@ -19,13 +19,13 @@ module SessionsHelper
 
   # Returns true if the user is logged in, false otherwise.
   def logged_in?
-    !current_user.nil?
+    !current_user.nil? # is there NO EMPTY current_user? Is there a current_user?
   end
 
   # Logs out the current user.
   def log_out
-    session.delete(:user_id)
-    @current_user = nil
+    session.delete(:user_id) # deletes memory in browser
+    @current_user = nil       # deletes you as current_user
   end
 
   # Redirects to stored location (or to the default).
@@ -39,6 +39,7 @@ module SessionsHelper
     session[:forwarding_url] = request.original_url if request.get?
   end
 
+  # Authorization -> Only logged in users can access some pages (example: edit page, log out, etc.)
   def only_loggedin_users
     # Goes to login page UNLESS the user is logged in already
     redirect_to login_url unless logged_in?
